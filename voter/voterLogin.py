@@ -11,14 +11,15 @@ def connexion():
         if login=="admin":
             if pwd=="admin123":
                 print("Connexion successful ! :)")
+                #renvoyer sur la page du vote // fonction du vote
                 notconnected=False
             else:
                 print("Mot de passe incorrect.")
-                print("Mot de passe incorrect")
+                print("Essayez à nouveau.")
                 
         else: 
             print("Vous n'êtes pas enregistré en tant que votant pour cette élection.")
-            print("Essayez à nouveau.")
+            print(".")
 
 
 connexion()
