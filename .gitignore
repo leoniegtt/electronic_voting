@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 #fichier base de donnée
-.db
+*.db
