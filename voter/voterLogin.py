@@ -1,5 +1,8 @@
-# vérifier l'idd du votant et qu'il a le droit de voter
+# Import the module0 directly since 
+# the current path is of modules.
+import gestiondb as db
 import votingProcess as vp
+
 
 def connexion():
     print("Connexion au système de vote ALATAX : ")
@@ -9,10 +12,10 @@ def connexion():
         login=input("Enter login : ")
         pwd=input("Enter password : ")
         # vérif association correcte login password avec la bdd
-        if login=="admin":
-            if pwd=="admin123":
+        if db.verifLogin(login):
+            if db.verifPwd(login, pwd):
                 print("Connexion successful ! :)")
-                #renvoyer sur la page du vote // fonction du vote
+                #renvoyer sur la fonction du vote
                 vp.vote()
                 notconnected=False
             else:
@@ -21,7 +24,7 @@ def connexion():
                 
         else: 
             print("Vous n'êtes pas enregistré en tant que votant pour cette élection.")
-            print(".")
+            print("Essayez à nouveau avec un login valide.")
 
 
 connexion()
