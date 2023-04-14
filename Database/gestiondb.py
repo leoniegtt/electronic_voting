@@ -1,11 +1,16 @@
 import sqlite3
-co = sqlite3.connect("dbb_pir.db")
+
+# Création fichier base de données .db
+def dbCreateFile():
+        co = sqlite3.connect("dbb_pir.db")
+
 cursor = co.cursor()
 
 # Création des tables
-cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_votants (f_name VARCHAR(100), l_name VARCHAR(100), mail VARCHAR(100), login VARCHAR(100), mdp VARCHAR(100), PRIMARY KEY (login))")
-cursor.execute("CREATE TABLE IF NOT EXISTS Liste_candidats (f_name VARCHAR(100), l_name VARCHAR(100), PRIMARY KEY (f_name, l_name))")
-cursor.execute("CREATE TABLE IF NOT EXISTS Bulletins_vote (bulletin VARCHAR(100) PRIMARY KEY)")
+def dbCreateTables():
+        cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_votants (f_name VARCHAR(100), l_name VARCHAR(100), mail VARCHAR(100), login VARCHAR(100), mdp VARCHAR(100), PRIMARY KEY (login))")
+        cursor.execute("CREATE TABLE IF NOT EXISTS Liste_candidats (f_name VARCHAR(100), l_name VARCHAR(100), PRIMARY KEY (f_name, l_name))")
+        cursor.execute("CREATE TABLE IF NOT EXISTS Bulletins_vote (bulletin VARCHAR(100) PRIMARY KEY)")
 
 # TEST en insérant dans la database : 
 
@@ -18,8 +23,9 @@ data = [
         ('Thomas', 'CG', 'thomas@mail', 'ttt', 'thomdp'),
 ]
 
-#cursor.executemany("INSERT INTO Liste_votants VALUES(?, ?, ?, ?, ?)", data)
-#co.commit()
+def insertTest(data_mul):
+        cursor.executemany("INSERT INTO Liste_votants VALUES(?, ?, ?, ?, ?)", data_mul)
+        co.commit()
 
 
 
@@ -35,4 +41,3 @@ if not cursor.fetchone():  # An empty result evaluates to False.
         print("Login failed")
 else:
         print("Welcome " + username + " !")
-
