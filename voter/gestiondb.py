@@ -1,9 +1,7 @@
 import sqlite3
 
 # Création fichier base de données .db
-def dbCreateFile():
-        co = sqlite3.connect("dbb_pir.db")
-
+co = sqlite3.connect("dbb_pir.db")
 cursor = co.cursor()
 
 # Création des tables
@@ -23,16 +21,27 @@ data = [
         ('Thomas', 'CG', 'thomas@mail', 'ttt', 'thomdp'),
 ]
 
-def insertTest(data_mul):
+data_candidats = [
+      ('Eric', 'Alata'),
+      ('Arthur', 'Bit-Mono'),
+      ('Vincent', 'Migliore'),
+      ('Vincent', 'Mahout'),
+]
+
+
+def insertVotants(data_mul):
         cursor.executemany("INSERT INTO Liste_votants VALUES(?, ?, ?, ?, ?)", data_mul)
+        co.commit()
+        
+def insertCandidates(data_candidates) :
+        cursor.executemany("INSERT INTO Liste_candidats VALUES(?, ?)", data_candidates)
         co.commit()
 
 
 
 # TEST Verification mdp et login bons
 
-username = "aaa"
-password = "aaamdp"
+
 
 def verifLogin(login):
         statement = f"SELECT login from Liste_votants WHERE login='{login}';"
@@ -54,8 +63,29 @@ def verifPwd(login, pwd):
                 # print("You are connected " + username + " !")
                 return True
 
+# return dictionnary with key : number, first_name last_name
+def getCandidates() :
+        res = cursor.execute("SELECT * FROM Liste_candidats")
+        co.commit()
+        res = list(res.fetchall())
+        
+        res_dict = {}
+
+        for i in range(len(res)) :
+                aux = res[i]
+                res_dict[i+1]= aux[0] + " " + aux[1]
+
+        return res_dict
+        
+        
+# Test :
+
 """
+username = "aaa"
+password = "aaamdp"
 verifLogin(username)
 print("2°")
 verifPwd(username, password)
+print(getCandidates())
+#insertCandidates(data_candidats)
 """
