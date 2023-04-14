@@ -1,3 +1,4 @@
+# pip install paillierlib
 from paillierlib import paillier
 from gmpy2 import mpz
 
@@ -9,10 +10,10 @@ nb_votes=0
 def initialize():
   
     #assign a number to each candidate, also to a blank vote
-    nb_of_candidates = x
+    nb_of_candidates = 3
 
     #choose the number assigned to candidates depending on how many people vote
-    for i in nb_of_candidates:
+    for i in range(nb_of_candidates.__sizeof__):
         candidate_i=mpz(pow(10,i+2)) # the number assigned to the candidate is 10^i+2
     blank_vote=mpz(1)
 
@@ -36,6 +37,20 @@ def decipher():
     print("vote results:\n{0}".format(results))
 
     #modular division to reveal number of votes for each candidate
-    for i in nb_of_candidates
+    for i in  range(nb_of_candidates.__sizeof__):
         candidate_i_votes=gmpy2.f_divmod(results, candidate_i)
         print("Candidate i votes : {0}".format(candidate_i_votes))
+
+def main():
+    #test
+    initialize()
+    votes=[('A',candidate_3), ('B',candidate_2),('C',candidate_3),
+       ('D',candidate_2),('E',candidate_3),('F',candidate_1),
+       ('G',candidate_3), ('H',candidate_2),('J',candidate_3),
+      ('K',candidate_1),('L',candidate_2),('M',candidate_3)]
+    for voter,candidate in votes:
+        print("Voter: {0}".format(voter))
+        print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
+        update_new_vote()
+    print("chiffre sum:  \n{0}".format(sum))
+    decipher()
