@@ -1,11 +1,13 @@
 from paillierlib import paillier
 from gmpy2 import mpz
 
+#key generation (public/private)
+key_pair = paillier.keygen()
+#initialize number of votes counted
+nb_votes=0
 
 def initialize():
-    #key generation (public/private)
-    key_pair = paillier.keygen()
-
+  
     #assign a number to each candidate, also to a blank vote
     nb_of_candidates = x
 
@@ -17,18 +19,15 @@ def initialize():
     #initialize the sum
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
 
+def get_public_key ():
+    return key_pair.public_key
 
-def cipher():
-    #initialize number of votes counted
-    nb_votes=0
-
-    for candidate in votes:
-        cipher=paillier.encrypt(mpz(candidate),key_pair.public_key)
-        print("création du chiffré")
-        #update sum by adding new vote
-        sum+=cipher
-        #update number of votes counted
-        nb_votes+=1
+def update_new_vote():
+    #faire un udp en attente de vote Quad vote appel fonction pour mettre à jour
+    #update sum by adding new vote
+    sum+=cipher # todo revoir lib paillier
+    #update number of votes counted
+    nb_votes+=1
 
 
 def decipher():
