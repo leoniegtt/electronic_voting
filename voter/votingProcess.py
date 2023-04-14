@@ -19,7 +19,7 @@ def vote():
             invalid = True
             while invalid:
                 # vérifier que c'est bien la personne pour qui on veut voter
-                yorn = input("Are you sure about you vote? yes (y) or no (n)")
+                yorn = input("Are you sure about you vote? yes (y) or no (n) ")
                 if yorn == "y":
                     validvote = True
                     invalid = False
@@ -27,9 +27,7 @@ def vote():
                     validvote = False
                     invalid = False
                 else: 
-                    print("Invalid answer. Please enter y for yes and n for no. ")
+                    print("Invalid answer. Please enter y for yes and n for no.")
     print ("Your vote has been casted. Goodbye.")
                 
     # cast vote avec protection => Pailler 
-
-vote()

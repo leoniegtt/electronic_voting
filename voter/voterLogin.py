@@ -1,4 +1,5 @@
 # vérifier l'idd du votant et qu'il a le droit de voter
+import votingProcess as vp
 
 def connexion():
     print("Connexion au système de vote ALATAX : ")
@@ -12,6 +13,7 @@ def connexion():
             if pwd=="admin123":
                 print("Connexion successful ! :)")
                 #renvoyer sur la page du vote // fonction du vote
+                vp.vote()
                 notconnected=False
             else:
                 print("Mot de passe incorrect.")
