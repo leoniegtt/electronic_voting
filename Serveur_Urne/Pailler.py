@@ -2,14 +2,16 @@
 
 from paillierlib import paillier
 from gmpy2 import mpz
+from gmpy2 import f_divmod
 
-#key generation (public/private)
-key_pair = paillier.keygen()
-#initialize number of votes counted
-nb_votes=0
+def get_public_key ():
+    return key_pair.public_key
 
-def initialize():
-  
+def main():
+    nb_votes=0
+
+    key_pair = paillier.keygen()
+
     #assign a number to each candidate, also to a blank vote
     nb_of_candidates = 3
 
@@ -22,30 +24,11 @@ def initialize():
     #initialize the sum
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
 
-def get_public_key ():
-    return key_pair.public_key
-
-def update_new_vote():
-    #faire un udp en attente de vote Quad vote appel fonction pour mettre à jour
-    #update sum by adding new vote
-    sum+=cipher # todo revoir lib paillier
-    #update number of votes counted
-    nb_votes+=1
-
-
-def decipher():
-#decryption (TO DO : move to different file later)
-    results=paillier.decrypt(sum, key_pair.private_key)
-    print("vote results:\n{0}".format(results))
-
-    #modular division to reveal number of votes for each candidate
-    for i in  range(nb_of_candidates.__sizeof__):
-        candidate_i_votes=gmpy2.f_divmod(results, candidate_i)
-        print("Candidate i votes : {0}".format(candidate_i_votes))
-
-def main():
+    #initialize anonymous votes
+    anon_votes=[]
     #test
-    initialize()
+    sum=paillier.encrypt(mpz(0), key_pair.public_key)
+
     candidate_1=mpz(10)
     candidate_2=mpz(100000)
     candidate_3=mpz(100000000000000) # the number assigned to the candidate is 10^i+2
@@ -56,10 +39,23 @@ def main():
       ('K',candidate_1),('L',candidate_2),('M',candidate_3)]
     for voter,candidate in votes:
         print("Voter: {0}".format(voter))
+        ciphertext=paillier.encrypt(mpz(candidate), key_pair.public_key)
         print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
-        update_new_vote()
+        sum+=ciphertext
+        anon_votes.append(ciphertext)
+        nb_votes+=1
     print("chiffre sum:  \n{0}".format(sum))
-    decipher()
+
+    #decryption (TO DO : move to different file later)
+    results=paillier.decrypt(sum, key_pair.private_key)
+    print("vote results:\n{0}".format(results))
+
+    #modular division to reveal number of votes for each candidate
+    candidate_3_votes, _voting_results=f_divmod(results,candidate_3)
+    print("Candidate 3 votes: {0}".format(candidate_3_votes))
+    candidate_2_votes, candidate_1_votes=f_divmod(_voting_results,candidate_2)
+    print("Candidate 2 votes: {0}".format(candidate_2_votes))
+    print("Candidate 1 votes: {0}".format(candidate_1_votes))
 
 
 if __name__ == "__main__":
