@@ -15,7 +15,7 @@ def createTokenKeys() :
 key = createTokenKeys
 
 def createTokenPublicKey() :
-  pubk_token = PKCS1_OAEP.new(createTokenKeys().publickey())
+  pubk_token = PKCS1_OAEP.new(key.publickey())
   return pubk_token
   #retourne la clé publique et la stocke dans variable globale au programme
 
@@ -43,7 +43,6 @@ def hashToken(token) :
 
 #chiffrer avec la clé publique
 def encryptToken(token) :
-  #token_encrypted = PKCS1_OAEP.new(key : pubk_token,hashAlgo :  )
   token_encrypted = pubk_token.encrypt(token)
   return token_encrypted
 

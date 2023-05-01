@@ -6,7 +6,7 @@ import DcreateToken
 def getPublicKeyPaillier() :
   publick_paillier = exec("../../...")
   return publick_paillier
-publick_paillier = getPublicKeyPaillier
+publick_paillier = getPublicKeyPaillier()
 
 def returnPublicKeyPaillier() :
   return publick_paillier
