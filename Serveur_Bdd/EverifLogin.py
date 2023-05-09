@@ -1,4 +1,10 @@
 import DcreateToken
+import sys
+import os
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
+
+import DBToken
 
 #envoie login chiffré et hashé  pour vérification auprès du système Vérif et récupération clé publique Pailler
 
@@ -15,12 +21,19 @@ def returnPublicKeyPaillier() :
 publick_paillier = getPublicKeyPaillier()
 
 #envoie login/pwd chiffré et hashé
-def sendToken(login, pwd):
+def sendToken():
+  login = 
+  pwd = 
   return DcreateToken.totalEncryption(login, pwd)
 
 #renvoie le résultat du vérificateur
 #false si le login/pwd a déjà été utilisé
 #true sinon
 def checkLoginOK() :
-  result = exec("../..") #lien vers le serveur de vérification que les logins n'ont pas déjà été utilisés
-  return result
+   #lien vers le serveur de vérification que les logins n'ont pas déjà été utilisés
+  token = sendToken
+  res = DBToken.isTokenExists(token)
+  if (res == False) :
+    return True
+  else :
+    return False
