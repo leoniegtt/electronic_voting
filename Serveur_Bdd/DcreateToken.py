@@ -8,6 +8,21 @@ from Crypto.Hash import SHA256
 
 import BverifLoginPwd as B
 
+import sys
+import os
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Voter")
+
+import voterLogin
+
+
+def getInformation() :
+        #exec("../..") #executer fonction du système Voter qui renvoie login, pwd et les retourner
+        (login, pwd) = voterLogin.getLoginInfo()
+        res = (login, pwd)
+        return res
+
+
 #taille en bits possibles : 1024, 2048, 3072, 2048 recommandé
 def createTokenKeys() :
   key = RSA.generate(2048)
