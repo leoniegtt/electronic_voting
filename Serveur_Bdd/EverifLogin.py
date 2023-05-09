@@ -10,7 +10,7 @@ import DBToken
 
 #récupération clé publique Paillier
 def getPublicKeyPaillier() :
-  publick_paillier = exec("../../...")
+  # publick_paillier = exec("../../...")  récupérer clé de paillier
   return publick_paillier
 publick_paillier = getPublicKeyPaillier()
 
@@ -22,18 +22,13 @@ publick_paillier = getPublicKeyPaillier()
 
 #envoie login/pwd chiffré et hashé
 def sendToken():
-  login = 
-  pwd = 
-  return DcreateToken.totalEncryption(login, pwd)
+  return DcreateToken.tokenCreated()
 
 #renvoie le résultat du vérificateur
 #false si le login/pwd a déjà été utilisé
 #true sinon
 def checkLoginOK() :
    #lien vers le serveur de vérification que les logins n'ont pas déjà été utilisés
-  token = sendToken
+  token = sendToken()
   res = DBToken.isTokenExists(token)
-  if (res == False) :
-    return True
-  else :
-    return False
+  return res

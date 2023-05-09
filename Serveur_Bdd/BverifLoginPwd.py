@@ -4,6 +4,8 @@ import os
 
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Voter")
 
+import voterLogin
+
 #import fonction marie qui donne
 
 connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
@@ -13,7 +15,8 @@ cursor = connect.cursor()
 
 def getInformation() :
         #exec("../..") #executer fonction du système Voter qui renvoie login, pwd et les retourner
-        res = [login, pwd]
+        (login, pwd) = voterLogin.getLoginInfo()
+        res = (login, pwd)
         return res
 
 def verifLogin(login):

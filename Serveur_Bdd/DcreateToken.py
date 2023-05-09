@@ -6,6 +6,8 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA256
 
+import BverifLoginPwd as B
+
 #taille en bits possibles : 1024, 2048, 3072, 2048 recommandé
 def createTokenKeys() :
   key = RSA.generate(2048)
@@ -46,12 +48,17 @@ def encryptToken(token) :
   token_encrypted = pubk_token.encrypt(token)
   return token_encrypted
 
-def totalEncryption(login, pwd) :
+def totalEncryption() :
+  (login, pwd) = B.getInformation()
   token = createToken(login, pwd)
   token = encodeToken(token)
   token = hashToken(token)
   token = encodeToken(token)
   token = encryptToken(token)
+  return token
+token = totalEncryption()
+
+def tokenCreated() :
   return token
 
 #TEST
