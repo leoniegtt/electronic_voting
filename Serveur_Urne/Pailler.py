@@ -27,10 +27,12 @@ def assign_num_candidate (nb_of_candidates):
     return candidates
 
 
+def chiffrement_vote( public_key, candidate) :
+    ciphertext=paillier.encrypt(mpz(candidate), public_key)
+    return ciphertext
 
 def compteur (votes,key_pair):
     nb_votes=0
-
     #initialize the sum
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
     #initialize anonymous votes
@@ -46,7 +48,6 @@ def compteur (votes,key_pair):
     return sum
 
 def decipher (sum, key_pair) :
-
     #decryption (TO DO : move to different file later)
     results = paillier.decrypt(sum, key_pair.private_key)
     print("vote results:\n{0}".format(results))
@@ -61,11 +62,11 @@ def division(candidates, results, nb_of_candidates) :
         print("Candidate " + str(i) +" votes: {0}".format(int(candidate_votes[i])))
     #modular division to reveal number of votes for each candidate
 
-def vote_add_List(candidates) :
-    votes=[('A',candidates[3]), ('B',candidates[2]),('C',candidates[3]),
-           ('D',candidates[2]),('E',candidates[3]),('F',candidates[1]),
-           ('G',candidates[3]), ('H',candidates[2]),('J',candidates[3]),
-           ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
+def create_list_vote(nb_of_candidates) :
+    votes = zeros(nb_of_candidates, int)
+    return votes
+def vote_add_List( votant , vote, votes) :
+    votes.add((votant,vote))
 
 def main ():
     key_pair = paillier.keygen()
