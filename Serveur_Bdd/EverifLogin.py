@@ -1,6 +1,6 @@
 import DcreateToken
 
-#envoie login chiffré et hashé et récupération clé publique Pailler
+#envoie login chiffré et hashé  pour vérification auprès du système Vérif et récupération clé publique Pailler
 
 #récupération clé publique Paillier
 def getPublicKeyPaillier() :

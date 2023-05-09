@@ -1,7 +1,7 @@
 import sqlite3
 
 # Création fichier base de données .db
-connect = sqlite3.connect("dbb_pir.db")
+connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
 cursor = connect.cursor()
 
 # Création des tables
@@ -34,6 +34,12 @@ def insertCandidates(data_candidates) :
         cursor.executemany("INSERT INTO Liste_candidats VALUES(?, ?)", data_candidates)
         connect.commit()
         
+
+dbCreateTables()
+insertVotants(data)
+insertCandidates(data_candidats)
+
+
 # Test :
 
 """

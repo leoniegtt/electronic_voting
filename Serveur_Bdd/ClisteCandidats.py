@@ -1,6 +1,6 @@
 import sqlite3
 
-connect = sqlite3.connect("dbb_pir.db")
+connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
 cursor = connect.cursor()
 
 #RECUPERE LES INFORMATIONS VOTANTS DE LA BDD ET LES RETOURNE SOUS LA FORME D'UN DICTIONNAIRE

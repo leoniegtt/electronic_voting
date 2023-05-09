@@ -1,8 +1,13 @@
 # Import the module0 directly since 
 # the current path is of modules.
-import gestiondb as db
+# import gestiondb as db
 import votingProcess as vp
+import sys
+import os
 
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
+
+import BverifLoginPwd as db
 
 def connexion():
     print("Connexion au système de vote ALATAX : ")
@@ -12,6 +17,7 @@ def connexion():
         login=input("Enter login : ")
         pwd=input("Enter password : ")
         # vérif association correcte login password avec la bdd
+
         if db.verifLogin(login):
             if db.verifPwd(login, pwd):
                 print("Connexion successful ! :)")
@@ -20,8 +26,7 @@ def connexion():
                 notconnected=False
             else:
                 print("Mot de passe incorrect.")
-                print("Essayez à nouveau.")
-                
+                print("Essayez à nouveau.")    
         else: 
             print("Vous n'êtes pas enregistré en tant que votant pour cette élection.")
             print("Essayez à nouveau avec un login valide.")
