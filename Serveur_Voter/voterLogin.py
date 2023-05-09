@@ -9,13 +9,17 @@ sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
 
 import BverifLoginPwd as db
 
+def getLoginInfo():
+    login=input("Enter login : ")
+    pwd=input("Enter password : ")
+    return (login, pwd)
+
 def connexion():
     print("Connexion au système de vote ALATAX : ")
     
     notconnected=True
     while notconnected:
-        login=input("Enter login : ")
-        pwd=input("Enter password : ")
+        (login, pwd) = getLoginInfo()
         # vérif association correcte login password avec la bdd
 
         if db.verifLogin(login):
