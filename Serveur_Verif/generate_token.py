@@ -1,7 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 import os
-import verify_token as vf
+import Serveur_Verif.verify_token as vf
 tokens = []
 def generate_token(login, private_key):
     random_value = os.urandom(16)
