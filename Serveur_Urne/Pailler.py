@@ -23,8 +23,7 @@ def assign_num_candidate (nb_of_candidates):
     candidates = zeros(nb_of_candidates+1, int)
     candidates[0] = mpz(1)
     for i in range(1 , nb_of_candidates+1):
-        candidates[i] = mpz(10**(nb_of_candidates+2))
-
+        candidates[i] = mpz(10**(i+2))
     return candidates
 
 
@@ -53,6 +52,15 @@ def decipher (sum, key_pair) :
     print("vote results:\n{0}".format(results))
     return results
 
+def division(candidates, results, nb_of_candidates) :
+    candidate_votes = zeros(nb_of_candidates+1, int)
+    candidate_votes[nb_of_candidates], _voting_results=f_divmod(results,int(candidates[nb_of_candidates]))
+    print("Candidate " + str(nb_of_candidates) +" votes: {0}".format(int(candidate_votes[nb_of_candidates])))
+    for i in range(nb_of_candidates-1 ,0,-1):
+        candidate_votes[i] , _voting_results = f_divmod(_voting_results,int(candidates[i]))
+        print("Candidate " + str(i) +" votes: {0}".format(int(candidate_votes[i])))
+    #modular division to reveal number of votes for each candidate
+
 
 def main ():
     key_pair = paillier.keygen()
@@ -66,15 +74,8 @@ def main ():
        ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
     sum = compteur (votes,key_pair)
     results = decipher(sum,key_pair)
-    #modular division to reveal number of votes for each candidate
-    print("heeereee")
-    print ( results )
-    print ( candidates[3] )
-    candidate_3_votes, _voting_results=f_divmod(results,int(candidates[3]))
-    print("Candidate 3 votes: {0}".format(candidate_3_votes))
-    candidate_2_votes, candidate_1_votes=f_divmod(_voting_results,int(candidates[2]))
-    print("Candidate 2 votes: {0}".format(candidate_2_votes))
-    print("Candidate 1 votes: {0}".format(candidate_1_votes))
+    division(candidates , results, nb_of_candidates)
+
 
 
 def main1():
@@ -99,10 +100,6 @@ def main1():
     #test
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
 
-    candidate_1=mpz(10)
-    candidate_2=mpz(100000)
-    candidate_3=mpz(100000000000000) # the number assigned to the candidate is 10^i+2
-    blank_vote=mpz(1)
     votes=[('A',candidate_3), ('B',candidate_2),('C',candidate_3),
        ('D',candidate_2),('E',candidate_3),('F',candidate_1),
        ('G',candidate_3), ('H',candidate_2),('J',candidate_3),
