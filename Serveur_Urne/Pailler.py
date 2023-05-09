@@ -29,32 +29,32 @@ def assign_num_candidate (nb_of_candidates):
 
 
 
-def compteur (votes):
+def compteur (votes,key_pair):
     nb_votes=0
-    key_pair = generate_key ()
+
     #initialize the sum
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
     #initialize anonymous votes
     anon_votes=[]
     for voter,candidate in votes:
         print("Voter: {0}".format(voter))
-        key_pair = generate_key ()
         ciphertext=paillier.encrypt(mpz(candidate), key_pair.public_key)
         print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
         sum+=ciphertext
         anon_votes.append(ciphertext)
         nb_votes+=1
     print("chiffre sum:  \n{0}".format(sum))
+    return sum
 
-def decipher () :
-    key_pair = generate_key ()
+def decipher (sum, key_pair) :
+
     #decryption (TO DO : move to different file later)
-    results=paillier.decrypt(sum, key_pair.private_key)
+    results = paillier.decrypt(sum, key_pair.private_key)
     print("vote results:\n{0}".format(results))
     return results
 
 
-def main1 ():
+def main ():
     key_pair = paillier.keygen()
     get_public_key (key_pair)
     get_private_key (key_pair)
@@ -64,11 +64,20 @@ def main1 ():
        ('D',candidates[2]),('E',candidates[3]),('F',candidates[1]),
        ('G',candidates[3]), ('H',candidates[2]),('J',candidates[3]),
        ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
-    compteur (votes)
-    decipher ()
+    sum = compteur (votes,key_pair)
+    results = decipher(sum,key_pair)
+    #modular division to reveal number of votes for each candidate
+    print("heeereee")
+    print ( results )
+    print ( candidates[3] )
+    candidate_3_votes, _voting_results=f_divmod(results,int(candidates[3]))
+    print("Candidate 3 votes: {0}".format(candidate_3_votes))
+    candidate_2_votes, candidate_1_votes=f_divmod(_voting_results,int(candidates[2]))
+    print("Candidate 2 votes: {0}".format(candidate_2_votes))
+    print("Candidate 1 votes: {0}".format(candidate_1_votes))
 
 
-def main():
+def main1():
     nb_votes=0
 
     key_pair = paillier.keygen()
