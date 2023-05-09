@@ -17,9 +17,10 @@ def isTokenExists(token):
         cursor.execute("SELECT * FROM Liste_Token WHERE Token=?", (str(token),))
         res = cursor.fetchone()
         if res is None:
-            return False
-        else:
+            insertToken(token)
             return True
+        else:
+            return False
 
 def getListToken() :
         res = cursor.execute("SELECT * FROM Liste_Token")
