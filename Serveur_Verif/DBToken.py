@@ -10,6 +10,7 @@ def dbCreateTables():
 
 
 def insertToken(token) :
+        #à faire quand on reçoit le token du voter dans le bulletin de vote
         cursor.execute("INSERT INTO Liste_Token VALUES(?)", (str(token),))
         connect.commit()
 
@@ -17,7 +18,6 @@ def isTokenExists(token):
         cursor.execute("SELECT * FROM Liste_Token WHERE Token=?", (str(token),))
         res = cursor.fetchone()
         if res is None:
-            insertToken(token)
             return True
         else:
             return False
