@@ -61,6 +61,11 @@ def division(candidates, results, nb_of_candidates) :
         print("Candidate " + str(i) +" votes: {0}".format(int(candidate_votes[i])))
     #modular division to reveal number of votes for each candidate
 
+def vote_add_List(candidates) :
+    votes=[('A',candidates[3]), ('B',candidates[2]),('C',candidates[3]),
+           ('D',candidates[2]),('E',candidates[3]),('F',candidates[1]),
+           ('G',candidates[3]), ('H',candidates[2]),('J',candidates[3]),
+           ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
 
 def main ():
     key_pair = paillier.keygen()
