@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
 
-import ClisteCandidats as db
+import Fsend as db
 
 def vote():
     validvote = False
@@ -11,7 +11,7 @@ def vote():
         print("Here are the candidates : ")
         # récup la liste des candidats à partir de la bdd
         # normalement je récup aussi tout le reste => comment je le stocke ????
-        candidates = db.getCandidates() 
+        [token, publick_paillier, candidates] = db.sendtoVoter()
         print(candidates)
         vote=int(input("Enter your vote (number from 1 to 4) : "))
         

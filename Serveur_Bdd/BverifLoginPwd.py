@@ -6,8 +6,8 @@ connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
 cursor = connect.cursor()
 
 #VERIFICATION QUE LES LOGIN, MDP ENTRES CORRESPONDENT A CEUX DE LA BDD
-
-
+login_local = ""
+pwd_local = ""
 
 def verifLogin(login):
         statement = f"SELECT login from Liste_votants WHERE login='{login}';"
@@ -30,8 +30,15 @@ def verifPwd(login, pwd):
                 return True
         
 def verification(login, pwd) :
+        login_local = login
+        pwd_local = pwd
         if verifLogin(login) and verifPwd(login, pwd) :
                 return True
         else :
                 return False
 
+def getInformation() :
+        res = (login_local, pwd_local)
+        print(login_local)
+        print(pwd_local)
+        return res

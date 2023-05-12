@@ -5,13 +5,15 @@ import os
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
 
 import DBToken
+import paillier_generate_key
 
 #envoie login chiffré et hashé  pour vérification auprès du système Vérif et récupération clé publique Pailler
 
 #récupération clé publique Paillier
 def getPublicKeyPaillier() :
-  # publick_paillier = exec("../../...")  récupérer clé de paillier
+  publick_paillier = paillier_generate_key.generate_key()
   return publick_paillier
+
 publick_paillier = getPublicKeyPaillier()
 
 def returnPublicKeyPaillier() :

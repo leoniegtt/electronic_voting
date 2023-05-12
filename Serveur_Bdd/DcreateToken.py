@@ -8,19 +8,14 @@ from Crypto.Hash import SHA256
 
 import BverifLoginPwd as B
 
-import sys
-import os
-
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Voter")
-
-import voterLogin
 
 
-def getInformation() :
-        #exec("../..") #executer fonction du système Voter qui renvoie login, pwd et les retourner
-        (login, pwd) = voterLogin.getLoginInfo()
-        res = (login, pwd)
-        return res
+
+
+
+#import voterLogin
+
+
 
 
 #taille en bits possibles : 1024, 2048, 3072, 2048 recommandé
@@ -29,14 +24,14 @@ def createTokenKeys() :
   return key
   #retourne key et la stocke dans variable globale au programme
 
-key = createTokenKeys
+key = createTokenKeys()
 
-def createTokenPublicKey() :
+def createTokenPublicKey(key) :
   pubk_token = PKCS1_OAEP.new(key.publickey())
   return pubk_token
   #retourne la clé publique et la stocke dans variable globale au programme
 
-pubk_token = createTokenPublicKey()
+pubk_token = createTokenPublicKey(key)
 
 def createTokenPrivateKey(key) :
   privk_token = PKCS1_OAEP.new(key)
