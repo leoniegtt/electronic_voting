@@ -4,6 +4,20 @@ import os
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
 
 import Fsend as db
+import chiffrementVote
+
+public_key_paillier = ""
+vote_chiffre_local = ""
+
+def getPublicKeyPaillier(publick_paillier) :
+     public_key_paillier = publick_paillier
+
+def voteChiffre(candidate) :
+    vote_chiffre = chiffrementVote.chiffrement_vote(public_key_paillier, candidate)
+    return vote_chiffre
+
+def sendChiffre() : 
+    return vote_chiffre_local
 
 def vote():
     validvote = False
@@ -12,6 +26,7 @@ def vote():
         # récup la liste des candidats à partir de la bdd
         # normalement je récup aussi tout le reste => comment je le stocke ????
         [token, publick_paillier, candidates] = db.sendtoVoter()
+        getPublicKeyPaillier(publick_paillier)
         print(candidates)
         vote=int(input("Enter your vote (number from 1 to 4) : "))
         
@@ -32,7 +47,9 @@ def vote():
                 else: 
                     print("Invalid answer. Please enter y for yes and n for no.")
     
-    # chiffrer vote => Pailler
+    # Envoyer le vote chiffré
+        vote_chiffre_local = voteChiffre(candidates[vote])
+    #envoyer le token
     print ("Your vote has been casted. Goodbye.")
 
     
