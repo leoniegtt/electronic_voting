@@ -19,7 +19,7 @@ def getCandidates() :
 
     res = cursor.execute("SELECT * FROM Liste_candidats")
     connect.commit()
-    res = list(res.fetchall())        
+    res = list(res.fetchall())
     res_dict = {}
     res_dict[0]= ("blank_vote",int(mpz(1)))
     for i in range(1,len(res)+1) :
