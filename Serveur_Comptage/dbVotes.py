@@ -22,13 +22,9 @@ def getAllVotes() :
     res = cursor.execute("SELECT * FROM Liste_Votes")
     connect.commit()
     res = list(res.fetchall())
-    print("----------------------------------------")
-    print(res)
+
     for x in res :
         (first,) = x
-        print("(((((((((((((((((((((((((((((----------------------------------------)))))))))))))))))))))))))))))")
-        print(type(first))
-
         xc = mpz(first.split("\n")[0])
         xn = mpz(first.split("\n")[1])
         votes.append(paillier.PaillierCiphertext(xc, xn))
@@ -37,4 +33,3 @@ def getAllVotes() :
         
 
 dbCreateTable()
-print(getAllVotes())
