@@ -11,3 +11,4 @@ from numpy import zeros,array
 def chiffrement_vote( public_key, candidate) :
     ciphertext=paillier.encrypt(mpz(candidate), public_key)
     return ciphertext
+
