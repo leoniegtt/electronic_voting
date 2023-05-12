@@ -22,19 +22,19 @@ def compteur (votes,key_pair):
 
     #initialize anonymous votes
     anon_votes=[]
-    print("heeeer")
-    print(votes)
     for ciphertext in votes:
-        print(type(ciphertext))
         #print("Vote Ciphertext:\n\n{0}".format(int(ciphertext[0]).c))
        # res=get_class(ciphertext[0])
         sum+=ciphertext
-        print("'''''''''''''''''")
-        print(sum)
-        #anon_votes.append(ciphertext[0])
+        anon_votes.append(ciphertext)
         nb_votes+=1
 
-    print("chiffre sum:  \n{0}".format(sum))
+    print("chiffre sum: \n{0}".format(sum))
+
+
+
+
+
     return sum
 
 
