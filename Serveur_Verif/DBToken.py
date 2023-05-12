@@ -1,7 +1,10 @@
+#executer une fois : python Serveur_Verif/DBToken.py
+ 
+
 import sqlite3
 
 # Création fichier base de données .db
-connect = sqlite3.connect("dbb_pir.db")
+connect = sqlite3.connect("Serveur_Verif/dbb_token.db")
 cursor = connect.cursor()
 
 # Création des tables
@@ -18,6 +21,7 @@ def isTokenExists(token):
         cursor.execute("SELECT * FROM Liste_Token WHERE Token=?", (str(token),))
         res = cursor.fetchone()
         if res is None:
+            print("*** Le token n'a jamais été utilisé pour voter : 1er vote ***")
             return True
         else:
             return False
@@ -29,3 +33,4 @@ def getListToken() :
         return res
         
 
+dbCreateTables()
