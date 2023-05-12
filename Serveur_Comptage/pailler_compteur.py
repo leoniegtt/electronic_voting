@@ -18,7 +18,7 @@ def division(candidates, results, nb_of_candidates) :
 def compteur (votes,key_pair):
     nb_votes=0
     #initialize the sum
-    sum=paillier.encrypt(mpz(0), key_pair.public_key)
+    sum=paillier.encrypt(mpz(100000), key_pair.public_key)
 
     #initialize anonymous votes
     anon_votes=[]

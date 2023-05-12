@@ -9,6 +9,14 @@ cursor = connect.cursor()
 
 # return dictionnary with key : number, first_name last_name
 def getCandidates() :
+    m=[]
+    m.append( mpz(10))
+    m.append(mpz(1))
+    #m.append(mpz(0))
+    m.append(mpz(2000))
+    m.append( mpz(4000))
+    m.append( mpz(999))
+
     res = cursor.execute("SELECT * FROM Liste_candidats")
     connect.commit()
     res = list(res.fetchall())
@@ -16,14 +24,8 @@ def getCandidates() :
     res_dict[0]= ("vote blanc",int(mpz(1)))
     for i in range(1,len(res)+1) :
         aux = res[i-1]
-        res_dict[i]= (aux[0] + " " + aux[1],int(mpz(10**(i+2))))
+        res_dict[i]= (aux[0] + " " + aux[1],m[i])
     return res_dict
 
-def main() :
-    getCandidates()
-    
-if __name__ == "__main__" :
-    main()
 
- 
     
