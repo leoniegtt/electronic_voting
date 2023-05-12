@@ -26,7 +26,7 @@ def compteur (votes,key_pair):
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
     #initialize anonymous votes
     anon_votes=[]
-    for ciphertext,candidate in votes:
+    for ciphertext in votes:
         #print("Voter: {0}".format(voter))
         #ciphertext=paillier.encrypt(mpz(candidate), key_pair.public_key)
         print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
@@ -35,3 +35,5 @@ def compteur (votes,key_pair):
         nb_votes+=1
     print("chiffre sum:  \n{0}".format(sum))
     return sum
+
+

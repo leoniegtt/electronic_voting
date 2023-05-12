@@ -19,11 +19,10 @@ def generate_key ():
 
 def assign_num_candidate (nb_of_candidates):
     #assign a number to each candidate, also to a blank vote
-
     candidates = zeros(nb_of_candidates+1, int)
     candidates[0] = mpz(1)
     for i in range(1 , nb_of_candidates+1):
-        candidates[i] = mpz(10**(i+2))
+        candidates[i] = mpz )
     return candidates
 
 
@@ -83,6 +82,19 @@ def main ():
     division(candidates , results, nb_of_candidates)
 
 
+def example_votes() :
+    key_pair = paillier.keygen()
+    get_public_key (key_pair)
+    get_private_key (key_pair)
+    nb_of_candidates = 3
+    candidates = assign_num_candidate (nb_of_candidates)
+    votes=[candidates[3], candidates[2],candidates[3],candidates[2],candidates[3]),('F',candidates[1]),
+           ('G',candidates[3]), ('H',candidates[2]),('J',candidates[3]),
+           ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
+    sum = compteur (votes,key_pair)
+    results = decipher(sum,key_pair)
+    division(candidates , results, nb_of_candidates)
+
 
 def main1():
     nb_votes=0
@@ -133,3 +145,5 @@ def main1():
 
 if __name__ == "__main__":
     main()
+
+

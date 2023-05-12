@@ -7,7 +7,7 @@ votes = []
 def create_list_vote(nb_of_candidates) :
     votes = zeros(nb_of_candidates, int)
     return votes
-def vote_add_List( votant , vote, votes) :
-    votes.append((votant,vote))
+def vote_add_List( vote) :
+    votes.append(vote)
 
 
