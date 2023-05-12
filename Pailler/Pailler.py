@@ -5,7 +5,20 @@ from gmpy2 import f_divmod
 from gmpy2 import mpz
 from paillierlib import paillier
 from numpy import zeros,array
-
+"""
+print(type(sum))
+print((sum.c))
+x = str(sum.c) + "\n" + str(sum.n)
+print(x)
+sum = None
+xc = mpz(x.split("\n")[0])
+xn = mpz(x.split("\n")[1])
+sum = paillier.PaillierCiphertext(xc, xn)
+print("ooo", sum)
+x = str(sum.c) + "\n" + str(sum.n)
+print(x)
+print(type(sum.c))
+"""
 
 def get_public_key (key_pair):
     return key_pair.public_key
@@ -22,7 +35,7 @@ def assign_num_candidate (nb_of_candidates):
     candidates = zeros(nb_of_candidates+1, int)
     candidates[0] = mpz(1)
     for i in range(1 , nb_of_candidates+1):
-        candidates[i] = mpz )
+        candidates[i] = mpz (10**(i+2))
     return candidates
 
 
@@ -88,9 +101,8 @@ def example_votes() :
     get_private_key (key_pair)
     nb_of_candidates = 3
     candidates = assign_num_candidate (nb_of_candidates)
-    votes=[candidates[3], candidates[2],candidates[3],candidates[2],candidates[3]),('F',candidates[1]),
-           ('G',candidates[3]), ('H',candidates[2]),('J',candidates[3]),
-           ('K',candidates[1]),('L',candidates[2]),('M',candidates[3])]
+    votes=[candidates[3], candidates[2],candidates[3],candidates[2],candidates[3],candidates[1],candidates[3]
+    ,candidates[2],candidates[3],candidates[1],candidates[2],candidates[3]]
     sum = compteur (votes,key_pair)
     results = decipher(sum,key_pair)
     division(candidates , results, nb_of_candidates)
@@ -126,7 +138,7 @@ def main1():
         print("Voter: {0}".format(voter))
         ciphertext=paillier.encrypt(mpz(candidate), key_pair.public_key)
         print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
-        sum+=ciphertext
+        sum+=(ciphertext)
         anon_votes.append(ciphertext)
         nb_votes+=1
     print("chiffre sum:  \n{0}".format(sum))
