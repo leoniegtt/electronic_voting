@@ -8,30 +8,10 @@ from Crypto.Hash import SHA256
 
 import BverifLoginPwd as B
 
-
-
-
-
-
-#import voterLogin
-
-
-
-
 #taille en bits possibles : 1024, 2048, 3072, 2048 recommandé
-def createTokenKeys() :
-  key = RSA.generate(2048)
-  return key
-  #retourne key et la stocke dans variable globale au programme
+key = RSA.generate(2048)
+pubk_token = PKCS1_OAEP.new(key.publickey())
 
-key = createTokenKeys()
-
-def createTokenPublicKey(key) :
-  pubk_token = PKCS1_OAEP.new(key.publickey())
-  return pubk_token
-  #retourne la clé publique et la stocke dans variable globale au programme
-
-pubk_token = createTokenPublicKey(key)
 
 def createTokenPrivateKey(key) :
   privk_token = PKCS1_OAEP.new(key)

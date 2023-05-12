@@ -33,14 +33,14 @@ def vote():
         # récup la liste des candidats à partir de la bdd
         # normalement je récup aussi tout le reste => comment je le stocke ????
         [token, publick_paillier, candidates_dico] = db.sendtoVoter()
-        
+        print("Votre token est : " + str(token))
         for i in range(0, len(candidates_dico) ) :
             (name , numbers) = candidates_dico[i]
             candidates[i] = name
             candidates_num.append(int(numbers))
             
         print(candidates)
-        vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+")"))
+        vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+") "))
         
         if vote not in candidates:
             print("Invalid vote. Please enter a valid number from 1 to 4.")
