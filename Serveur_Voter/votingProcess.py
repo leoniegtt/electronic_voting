@@ -9,6 +9,7 @@ import assign_num_candidate
 import Fsend as db
 import chiffrementVote
 import dbVotes
+import DBToken
 
 #public_key_paillier = ""
 #vote_chiffre_local = ""
@@ -64,6 +65,7 @@ def vote():
         dbVotes.insertVote(vote_chiffre_local)
         
     #envoyer le token
+        DBToken.insertToken(token)
     
     print ("Your vote has been casted. Goodbye.")
     
