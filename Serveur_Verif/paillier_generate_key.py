@@ -8,12 +8,12 @@ def generate_key ():
     key_pair = paillier.keygen()
     return key_pair
 
-def maiin() :
-    jey = generate_key()
+def main() :
+    jey = generate_key().public_key
     print(jey)
     print("hh")
     return jey
 
-if __name__ == "__maiin__" :
+if __name__ == "__main__" :
     print("rr")
-    maiin()
+    main()
