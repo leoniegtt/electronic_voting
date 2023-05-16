@@ -1,4 +1,5 @@
 import sqlite3
+import DcreateToken
 
 # Création fichier base de données .db
 connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
@@ -8,6 +9,8 @@ cursor = connect.cursor()
 def dbCreateTables():
         cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_votants (f_name VARCHAR(100), l_name VARCHAR(100), mail VARCHAR(100), login VARCHAR(100), mdp VARCHAR(100), PRIMARY KEY (login))")
         cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_candidats (f_name VARCHAR(100), l_name VARCHAR(100), PRIMARY KEY (f_name, l_name))")
+        cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_Votant2 ( login VARCHAR(100), mdp VARCHAR(100), Token VARCHAR(300), PRIMARY KEY (login, Token))")
+
 
 # TEST en insérant dans la database : 
 data = [
@@ -18,6 +21,19 @@ data = [
         ('Léonie', 'G', 'leo@mail', 'leo', 'dijon4ever'),
         ('Thomas', 'CG', 'thomas@mail', 'ttt', 'thomdp'),
 ]
+
+def addToken() :
+        data = []
+        res = cursor.execute("SELECT login, mdp FROM Liste_votants")
+        connect.commit()
+        res = list(res.fetchall())
+        for i in res :
+                login = i[0]
+                print("login : " + str(login))
+                pwd = i[1]
+                print("pwd : " + str(pwd))
+                data.append((login, pwd, DcreateToken.totalEncryption(login, pwd)))
+        insertInfoToken(data)
 
 data_candidats = [
       ('Eric', 'Alata'),
@@ -34,20 +50,12 @@ def insertCandidates(data_candidates) :
         cursor.executemany("INSERT INTO Liste_candidats VALUES(?, ?)", data_candidates)
         connect.commit()
         
+def insertInfoToken(data):
+        cursor.executemany("INSERT INTO Liste_Votant2 VALUES(?, ?, ?)", data)
+        connect.commit()
 
 dbCreateTables()
 insertVotants(data)
 insertCandidates(data_candidats)
+addToken()
 
-
-# Test :
-
-"""
-username = "aaa"
-password = "aaamdp"
-verifLogin(username)
-print("2°")
-verifPwd(username, password)
-print(getCandidates())
-#insertCandidates(data_candidats)
-"""

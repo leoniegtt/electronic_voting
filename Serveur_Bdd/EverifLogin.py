@@ -19,6 +19,7 @@ publick_paillier = getPublicKeyPaillier()
 def returnPublicKeyPaillier() :
   return publick_paillier
 
+'''
 #on appelle une fois et on conserve la clé publique dans une variable globale  
 publick_paillier = getPublicKeyPaillier()
 
@@ -34,3 +35,4 @@ def checkLoginOK() :
   token = sendToken()
   res = DBToken.isTokenExists(token)
   return res
+'''

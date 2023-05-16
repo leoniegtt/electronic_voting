@@ -5,7 +5,6 @@ import os
 import token_list as tl
 
 
-
 def verify_token(token, public_key_pem, login):
     public_key = serialization.load_pem_public_key(
         public_key_pem,
