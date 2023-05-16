@@ -38,19 +38,19 @@ def encryptToken(token) :
   token_encrypted = pubk_token.encrypt(token)
   return token_encrypted
 
-def totalEncryption() :
-  (login, pwd) = B.getInformation()
+def totalEncryption(login, pwd) :
   token = createToken(login, pwd)
   token = encodeToken(token)
   token = hashToken(token)
   token = encodeToken(token)
   token = encryptToken(token)
   return token
-token = totalEncryption()
+
+'''token = totalEncryption()
 
 def tokenCreated() :
   return token
-
+'''
 #TEST
 '''
 #print(encryptToken())

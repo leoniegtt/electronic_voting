@@ -6,11 +6,11 @@ connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
 cursor = connect.cursor()
 
 #VERIFICATION QUE LES LOGIN, MDP ENTRES CORRESPONDENT A CEUX DE LA BDD
-login_local = ""
-pwd_local = ""
+
+global token_local
 
 def verifLogin(login):
-        statement = f"SELECT login from Liste_votants WHERE login='{login}';"
+        statement = f"SELECT login from Liste_Votant2 WHERE login='{login}';"
         cursor.execute(statement)
         if not cursor.fetchone():  # An empty result evaluates to False.
                 # print("Login not exist : " + username)
@@ -20,25 +20,38 @@ def verifLogin(login):
                 return True
 
 def verifPwd(login, pwd):
-        statement = f"SELECT login from Liste_votants WHERE login='{login}' AND mdp = '{pwd}';"
+        statement = f"SELECT login from Liste_Votant2 WHERE login='{login}' AND mdp = '{pwd}';"
         cursor.execute(statement)
         if not cursor.fetchone():  # An empty result evaluates to False.
                 # print("Login failed " + username)
                 return False
         else:
                 # print("You are connected " + username + " !")
+                global token_local
+                token_local = getToken(login, pwd)
                 return True
-        
-def verification(login, pwd) :
-        login_local = login
-        pwd_local = pwd
+
+def getToken(login, pwd) :
+        statement = f"SELECT Token from Liste_Votant2 WHERE login='{login}' AND mdp = '{pwd}';"
+        cursor.execute(statement)
+        res = cursor.fetchone()
+        token = res[0]
+        return token
+
+def returnToken() :
+        return token_local
+    
+def verification(login, pwd) : #pas utilisé ?
         if verifLogin(login) and verifPwd(login, pwd) :
                 return True
         else :
                 return False
 
+
+'''
 def getInformation() :
         res = (login_local, pwd_local)
         print(login_local)
         print(pwd_local)
         return res
+'''
