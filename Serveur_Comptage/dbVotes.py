@@ -13,8 +13,8 @@ def dbCreateTable():
         cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_Votes (vote BLOB(800), PRIMARY KEY (vote))")
         
 def insertVote(vote):
-        x = str(vote.c) + "\n" + str(vote.n)
-        cursor.execute("INSERT INTO Liste_Votes VALUES(?)", (str(x),))
+        x = str(vote.c) + "\n" + str(vote.n) + "\n" + str(vote.n_sqr)
+        cursor.execute("INSERT INTO Liste_Votes VALUES(?)", (x,))
         connect.commit()
         
 def getAllVotes() :
@@ -24,11 +24,17 @@ def getAllVotes() :
     res = list(res.fetchall())
 
     for x in res :
+        print("BEFORE = \n" + "\n" + str(x))
         (first,) = x
         xc = mpz(first.split("\n")[0])
         xn = mpz(first.split("\n")[1])
-        votes.append(paillier.PaillierCiphertext(xc, xn))
+        xn2 = mpz(first.split("\n")[2])
+        r1 = paillier.PaillierCiphertext(xc, xn)
+        r1.n_sqr = xn2
 
+        votes.append(r1)
+        print("AFTER = " + str(paillier.PaillierCiphertext(xc, xn2)))
+        print(xn2)
     return votes
         
 

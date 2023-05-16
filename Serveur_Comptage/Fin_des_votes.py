@@ -14,6 +14,7 @@ def main() :
     key_pair = get_key_pair()
     sum = compteur (votes,key_pair)
     results = decipher(sum,key_pair)
+    print("resultsss " + str(results))
     [token, publick_paillier, candidates_dico] = db.sendtoVoter()
     candidates = dict()
     candidates_num =[]
@@ -23,7 +24,7 @@ def main() :
         candidates_num.append(int(numbers))
 
     candidates = candidates_num
-
+    print ("len_candidate = " + str(len(candidates)-1))
     division(candidates , results, len(candidates)-1)
 
 

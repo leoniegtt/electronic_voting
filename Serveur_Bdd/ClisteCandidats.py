@@ -21,10 +21,10 @@ def getCandidates() :
     connect.commit()
     res = list(res.fetchall())
     res_dict = {}
-    res_dict[0]= ("blank_vote",int(mpz(1)))
+    res_dict[0]= ("blank_vote",mpz(1))
     for i in range(1,len(res)+1) :
         aux = res[i-1]
-        res_dict[i]= (aux[0] + " " + aux[1],m[i])
+        res_dict[i]= (aux[0] + " " + aux[1],mpz (10**(i+2)))
     return res_dict
 
 

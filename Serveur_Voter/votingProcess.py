@@ -37,7 +37,7 @@ def vote():
         for i in range(0, len(candidates_dico) ) :
             (name , numbers) = candidates_dico[i]
             candidates[i] = name
-            candidates_num.append(int(numbers))
+            candidates_num.append(numbers)
             
         print(candidates)
         vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+")"))
