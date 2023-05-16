@@ -9,16 +9,16 @@ cursor = connect.cursor()
 
 # Création des tables
 def dbCreateTables():
-        cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_Token (Token VARCHAR(300), PRIMARY KEY (Token))")
+        cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_Token (Token1 VARCHAR(300), Token2 VARCHAR(300), PRIMARY KEY (Token1))")
 
 
-def insertToken(token) :
+def insertTokens(token1, token2) :
         #à faire quand on reçoit le token du voter dans le bulletin de vote
-        cursor.execute("INSERT INTO Liste_Token VALUES(?)", (str(token),))
+        cursor.execute("INSERT INTO Liste_Token VALUES(?, ?)", (token1, token2))
         connect.commit()
 
-def isTokenExists(token):
-        cursor.execute("SELECT * FROM Liste_Token WHERE Token=?", (str(token),))
+def isTokenExists(token): #modif
+        cursor.execute("SELECT * FROM Liste_Token WHERE Token=?", (token))
         res = cursor.fetchone()
         if res is None:
             print("*** Le token n'a jamais été utilisé pour voter : 1er vote ***")
@@ -26,7 +26,7 @@ def isTokenExists(token):
         else:
             return False
 
-def getListToken() :
+def getListToken() : #pour le résultat
         res = cursor.execute("SELECT * FROM Liste_Token")
         connect.commit()
         res = list(res.fetchall())
