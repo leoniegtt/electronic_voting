@@ -76,7 +76,7 @@ def vote():
     if not  alreadyVoted:
         # Envoyer le vote chiffré
         vote_chiffre_local = voteChiffre(candidates_num[vote])
-        dbVotes.insertVote(vote_chiffre_local)        
+        dbVotes.insertVote(vote_chiffre_local,token2)        
     
         print ("Your vote has been casted. Goodbye.")
     

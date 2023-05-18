@@ -1,8 +1,14 @@
 import sqlite3
+import sys
+import os
 
 from gmpy2 import mpz
 
 from paillierlib import paillier
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
+
+import gestionDBToken
 
 # Création fichier base de données .db
 connect = sqlite3.connect("Serveur_Comptage/dbb_vote.db")
@@ -12,11 +18,20 @@ cursor = connect.cursor()
 def dbCreateTable():
         cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_Votes (vote BLOB(800), PRIMARY KEY (vote))")
         
-def insertVote(vote):
+def insertVote(vote, token2):
+    res = verifToken2(token2)
+    if res == False :
+        #bloquer le vote
+        print("[syst_comptage] Le vote n'a pas été pris en compte")
+    else :
         x = str(vote.c) + "\n" + str(vote.n) + "\n" + str(vote.n_sqr)
         cursor.execute("INSERT INTO Liste_Votes VALUES(?)", (x,))
         connect.commit()
-        
+
+def verifToken2 (token2) :
+    #appelle fonction de serveur verif avec token 2 pour savoir si déjà utilisé ou pas
+    return gestionDBToken.isTokenUtilise(token2)
+
 def getAllVotes() :
     votes=[]
     res = cursor.execute("SELECT * FROM Liste_Votes")

@@ -33,12 +33,26 @@ def isTokenExists(token1): #0 : arrêt du vote, 1: première création token2, 2
                         print("[syst] RETURN 2 (maj de token2)")
                         return 2
 
+def isTokenUtilise(token2) :
+        cursor.execute("SELECT Utilise FROM Liste_Token WHERE Token2=?", (token2, ))
+        res = cursor.fetchone()
+        if res[0] == 0 :
+                print("[syst_verif] Le vote est accepté")
+                #maj valeur utilisé à 1
+                updateUtilise(token2)
+                return True
+        else :
+                print("[syst_verif] Le vote est refusé")
+                return False
+        
+
 def updateToken(token1, token2):
         cursor.execute("UPDATE Liste_Token SET Token2 = ? WHERE Token1 = ?", (token2, token1))
         connect.commit()
 
-def updateUtilise(): # a faire
-        return any
+def updateUtilise(token2):
+        cursor.execute("UPDATE Liste_Token SET Utilise = ? WHERE Token2 = ?", (1, token2))
+        connect.commit()
 
 
 def getListToken() : #pour le résultat
