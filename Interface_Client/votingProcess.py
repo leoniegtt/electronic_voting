@@ -1,14 +1,15 @@
 import sys
 import os
 
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Comptage")
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
-
-import Fsend as db
 import chiffrementVote
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
+import Fsend as db
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Comptage")
 import dbVotes
-#serveur verif
+
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
 import gestionDBToken
 import replaceToken
 

@@ -2,7 +2,6 @@ import EgetPublicKeyPaillier
 import BverifLoginPwd
 import ClisteCandidats
 
-
 #envoie token chiffré avec login, pwd, la liste des candidats
 def createListReturn() :
     token = BverifLoginPwd.returnToken()

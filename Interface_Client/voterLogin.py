@@ -1,12 +1,8 @@
-# Import the module0 directly since 
-# the current path is of modules.
-# import gestiondb as db
 import votingProcess as vp
 import sys
 import os
 
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
-
 import BverifLoginPwd as db
 
 def getLoginInfo():

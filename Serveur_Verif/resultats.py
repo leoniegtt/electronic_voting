@@ -11,11 +11,11 @@ from paillier_generate_key import get_key_pair
 from decipher import decipher
 from paillierDiviseur import division
 
-
 def giveResults() :
     votes = dbVotes.getAllVotes()
     key_pair = get_key_pair()
     public_key = key_pair.public_key
+    
     #pas donner la clé privée au compteur
     sum = paillier_compteur.compteur (votes,public_key)
     results = decipher(sum,key_pair)

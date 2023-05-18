@@ -3,7 +3,6 @@ import sys
 import os
 
 from gmpy2 import mpz
-
 from paillierlib import paillier
 
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")

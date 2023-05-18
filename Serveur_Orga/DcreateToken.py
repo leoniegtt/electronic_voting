@@ -12,7 +12,6 @@ import BverifLoginPwd as B
 key = RSA.generate(2048)
 pubk_token = PKCS1_OAEP.new(key.publickey())
 
-
 def createTokenPrivateKey(key) :
   privk_token = PKCS1_OAEP.new(key)
   return privk_token
