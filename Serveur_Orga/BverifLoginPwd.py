@@ -2,7 +2,7 @@ import sqlite3
 
 #import fonction marie qui donne
 
-connect = sqlite3.connect("Serveur_Bdd/dbb_orga.db")
+connect = sqlite3.connect("Serveur_Orga/dbb_orga.db")
 cursor = connect.cursor()
 
 #VERIFICATION QUE LES LOGIN, MDP ENTRES CORRESPONDENT A CEUX DE LA BDD
@@ -40,18 +40,3 @@ def getToken(login, pwd) :
 
 def returnToken() :
         return token_local
-    
-def verification(login, pwd) : #pas utilisé ?
-        if verifLogin(login) and verifPwd(login, pwd) :
-                return True
-        else :
-                return False
-
-
-'''
-def getInformation() :
-        res = (login_local, pwd_local)
-        print(login_local)
-        print(pwd_local)
-        return res
-'''

@@ -2,7 +2,7 @@ import sqlite3
 import DcreateToken
 
 # Création fichier base de données .db
-connect = sqlite3.connect("Serveur_Bdd/dbb_orga.db")
+connect = sqlite3.connect("Serveur_Orga/dbb_orga.db")
 cursor = connect.cursor()
 
 # Création des tables

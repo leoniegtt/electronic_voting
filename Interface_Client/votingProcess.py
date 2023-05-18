@@ -1,11 +1,10 @@
 import sys
 import os
 
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Comptage")
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
-import paillier_generate_key
-import assign_num_candidate 
+
 import Fsend as db
 import chiffrementVote
 import dbVotes
@@ -13,23 +12,11 @@ import dbVotes
 import gestionDBToken
 import replaceToken
 
-global token1
-
-def getPublicKeyPaillier() :
-     public_key_paillier = paillier_generate_key.get_key_pair().public_key
-     return public_key_paillier
-
-def voteChiffre(candidate) :
-    public_key_paillier = getPublicKeyPaillier()
+def voteChiffre(candidate, public_key_paillier) :
     vote_chiffre = chiffrementVote.chiffrement_vote(public_key_paillier, candidate)
     return vote_chiffre
 
-def sendToken1() : #todo
-    return token1
-
 def vote():
-    candidates = dict()
-    candidates_num =[]
     print("LE VOTE COMMENCE")
     validvote = False
     alreadyVoted = False 
@@ -37,7 +24,7 @@ def vote():
         
         # récup la liste des candidats à partir de la bdd
         # normalement je récup aussi tout le reste => comment je le stocke ????
-        [token, publick_paillier, candidates_dico] = db.sendtoVoter()
+        [token,public_key_paillier, candidates, candidates_num] = db.sendtoVoter()
         token2 = replaceToken.getToken2(token)
 
         if token2 == "ERROR" :
@@ -46,12 +33,6 @@ def vote():
             validvote = True
             alreadyVoted = True
         else :
-            print("Your vote token is : \n" + str(token2) + "\n")
-            for i in range(0, len(candidates_dico) ) :
-                (name , numbers) = candidates_dico[i]
-                candidates[i] = name
-                candidates_num.append(numbers)
-            
             print("Here are the candidates : ") 
             print(candidates)
             vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+") "))
@@ -75,8 +56,9 @@ def vote():
 
     if not  alreadyVoted:
         # Envoyer le vote chiffré
-        vote_chiffre_local = voteChiffre(candidates_num[vote])
+        vote_chiffre_local = voteChiffre(candidates_num[vote], public_key_paillier)
         dbVotes.insertVote(vote_chiffre_local,token2)        
     
         print ("Your vote has been casted. Goodbye.")
+        print("Here is your ballot: \n" + str(vote_chiffre_local)+ "\nYou can save it to verify your vote when the election is done!")
     

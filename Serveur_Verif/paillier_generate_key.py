@@ -10,9 +10,3 @@ key_pair = paillier.keygen()
 
 def get_key_pair ():
     return key_pair
-
-def main() :
-    print("on est dans le main")
-    
-if __name__ == "__main__":
-    main()

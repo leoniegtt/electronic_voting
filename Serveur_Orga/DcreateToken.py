@@ -1,4 +1,4 @@
-#a executer dans le terminal avant utilisation :
+#A EXECUTER dans le terminal avant première utilisation :
 #pip install pycryptodome
 #pip install cryptography
 
@@ -45,22 +45,3 @@ def totalEncryption(login, pwd) :
   token = encodeToken(token)
   token = encryptToken(token)
   return token
-
-'''token = totalEncryption()
-
-def tokenCreated() :
-  return token
-'''
-#TEST
-'''
-#print(encryptToken())
-#print(hashToken(encodeToken(createToken("thomas", "pwd"))))
-
-chiffre1 = encodeToken(hashToken(encodeToken(createToken("thomas", "pwd"))))
-chiffre2 = encodeToken(hashToken(encodeToken(createToken("thomas", "pwd"))))
-
-print(chiffre1)
-print(chiffre2)
-print(chiffre1 == chiffre2)
-#print(encryptToken(encodeToken(hashToken(encodeToken(createToken("thomas", "pwd"))))))
-'''

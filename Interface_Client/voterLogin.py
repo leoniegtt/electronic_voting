@@ -5,7 +5,7 @@ import votingProcess as vp
 import sys
 import os
 
-sys.path.append(os.path.dirname(__file__) + "/../Serveur_Bdd")
+sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
 
 import BverifLoginPwd as db
 

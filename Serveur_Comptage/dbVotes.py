@@ -39,17 +39,19 @@ def getAllVotes() :
     res = list(res.fetchall())
 
     for x in res :
-        print("BEFORE = \n" + "\n" + str(x))
+        #print("BEFORE = \n" + "\n" + str(x))
         (first,) = x
         xc = mpz(first.split("\n")[0])
+        #print("xc : \n" + str(xc))
         xn = mpz(first.split("\n")[1])
-        xn2 = mpz(first.split("\n")[2])
+        #print("xn : \n" + str(xn))
+        #xn2 = mpz(first.split("\n")[2])
         r1 = paillier.PaillierCiphertext(xc, xn)
-        r1.n_sqr = xn2
+        #r1.n_sqr = xn2
 
         votes.append(r1)
-        print("AFTER = " + str(paillier.PaillierCiphertext(xc, xn2)))
-        print(xn2)
+        #print("AFTER = " + str(paillier.PaillierCiphertext(xc, xn)))
+        #print(xn2)
     return votes
         
 

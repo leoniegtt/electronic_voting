@@ -62,6 +62,6 @@ def getListToken() : #pour le résultat
         return res
         
 
-#dbCreateTables()
+dbCreateTables()
 #insertTokens("thomas","coucou")
 #print(str(isTokenExists("marie")))
