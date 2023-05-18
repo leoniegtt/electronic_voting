@@ -1,11 +1,9 @@
-
-
 from gmpy2 import f_divmod
 from gmpy2 import mpz
 from paillierlib import paillier
-from numpy import zeros,array
-import sys
+from numpy import zeros
 
+#A ENLEVER
 def division(candidates, results, nb_of_candidates) :
 
     print("result----"+ str(results))
