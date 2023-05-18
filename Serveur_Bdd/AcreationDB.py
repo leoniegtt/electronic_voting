@@ -2,7 +2,7 @@ import sqlite3
 import DcreateToken
 
 # Création fichier base de données .db
-connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
+connect = sqlite3.connect("Serveur_Bdd/dbb_orga.db")
 cursor = connect.cursor()
 
 # Création des tables
@@ -29,9 +29,7 @@ def addToken() :
         res = list(res.fetchall())
         for i in res :
                 login = i[0]
-                print("login : " + str(login))
                 pwd = i[1]
-                print("pwd : " + str(pwd))
                 data.append((login, pwd, DcreateToken.totalEncryption(login, pwd)))
         insertInfoToken(data)
 

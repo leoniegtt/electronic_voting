@@ -13,8 +13,6 @@ def createTokenPrivateKey(key) :
 #Token : string : "login, pwd"
 def createToken(token1) :
   token = str(token1[:50])
-  print(token)
-  print(len(token))
   return token
 
 #change Token into byte string

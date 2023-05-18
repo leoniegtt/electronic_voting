@@ -1,6 +1,6 @@
 import sqlite3
 from gmpy2 import mpz
-connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
+connect = sqlite3.connect("Serveur_Bdd/dbb_orga.db")
 cursor = connect.cursor()
 
 #RECUPERE LES INFORMATIONS VOTANTS DE LA BDD ET LES RETOURNE SOUS LA FORME D'UN DICTIONNAIRE

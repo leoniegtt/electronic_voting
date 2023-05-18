@@ -2,7 +2,7 @@ import sqlite3
 
 #import fonction marie qui donne
 
-connect = sqlite3.connect("Serveur_Bdd/dbb_pir.db")
+connect = sqlite3.connect("Serveur_Bdd/dbb_orga.db")
 cursor = connect.cursor()
 
 #VERIFICATION QUE LES LOGIN, MDP ENTRES CORRESPONDENT A CEUX DE LA BDD

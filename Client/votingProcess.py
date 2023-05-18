@@ -10,7 +10,7 @@ import Fsend as db
 import chiffrementVote
 import dbVotes
 #serveur verif
-import DBToken
+import gestionDBToken
 import replaceToken
 
 global token1
@@ -32,42 +32,49 @@ def vote():
     candidates_num =[]
     print("LE VOTE COMMENCE")
     validvote = False
+    alreadyVoted = False 
     while not validvote :
-        print("Here are the candidates : ")
+        
         # récup la liste des candidats à partir de la bdd
         # normalement je récup aussi tout le reste => comment je le stocke ????
         [token, publick_paillier, candidates_dico] = db.sendtoVoter()
         token2 = replaceToken.getToken2(token)
-        print("Votre token de vote est : " + str(token2))
-        for i in range(0, len(candidates_dico) ) :
-            (name , numbers) = candidates_dico[i]
-            candidates[i] = name
-            candidates_num.append(int(numbers))
+        if token2 == "ERROR" :
+            print("You have already voted.")
+            print("You cannot vote again for this election. Goodbye.")
+            validvote = True
+            alreadyVoted = True
+        else :
+            print("Your vote token is : \n" + str(token2) + "\n")
+            for i in range(0, len(candidates_dico) ) :
+                (name , numbers) = candidates_dico[i]
+                candidates[i] = name
+                candidates_num.append(int(numbers))
+            print("Here are the candidates : ") 
+            print(candidates)
+            vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+") "))
             
-        print(candidates)
-        vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+") "))
-        
-        if vote not in candidates:
-            print("Invalid vote. Please enter a valid number from 1 to 4.")
-        else:
-            print("You voted for", candidates[vote] + ".")
-            invalid = True
-            while invalid:
-                # vérifier que c'est bien la personne pour qui on veut voter
-                yorn = input("Are you sure about you vote? yes (y) or no (n) ")
-                if yorn == "y":
-                    validvote = True
-                    invalid = False
-                elif yorn == "n":
-                    validvote = False
+            if vote not in candidates:
+                print("Invalid vote. Please enter a valid number from 1 to 4.")
+            else:
+                print("You voted for", candidates[vote] + ".")
+                invalid = True
+                while invalid:
+                    # vérifier que c'est bien la personne pour qui on veut voter
+                    yorn = input("Are you sure about you vote? yes (y) or no (n) ")
+                    if yorn == "y":
+                        validvote = True
+                        invalid = False
+                    elif yorn == "n":
+                        validvote = False
 
-                else: 
-                    print("Invalid answer. Please enter y for yes and n for no.")
-    
-    # Envoyer le vote chiffré
-       
+                    else: 
+                        print("Invalid answer. Please enter y for yes and n for no.")
+
+    if not  alreadyVoted:
+        # Envoyer le vote chiffré
         vote_chiffre_local = voteChiffre(candidates_num[vote])
         dbVotes.insertVote(vote_chiffre_local)        
     
-    print ("Your vote has been casted. Goodbye.")
+        print ("Your vote has been casted. Goodbye.")
     

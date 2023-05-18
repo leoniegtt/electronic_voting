@@ -4,6 +4,9 @@ from cryptography.hazmat.backends import default_backend
 import os
 import token_list as tl
 
+#entre serveur verif et comptage
+#serveur comptage envoie token 2, il veut savoir si oui ou non il est déjà dans la bdd et si il a déjà été utilisé
+
 
 def verify_token(token, public_key_pem, login):
     public_key = serialization.load_pem_public_key(

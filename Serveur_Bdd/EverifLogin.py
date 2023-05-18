@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.dirname(__file__) + "/../Serveur_Verif")
 
-import DBToken
+import gestionDBToken
 import paillier_generate_key
 
 #envoie login chiffré et hashé  pour vérification auprès du système Vérif et récupération clé publique Pailler
