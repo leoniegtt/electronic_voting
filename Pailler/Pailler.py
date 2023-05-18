@@ -39,8 +39,8 @@ def assign_num_candidate (nb_of_candidates):
     return candidates
 
 
-def chiffrement_vote( public_key, candidate) :
-    ciphertext=paillier.encrypt(mpz(candidate), public_key)
+def chiffrement_vote( public_key, vote) :
+    ciphertext=paillier.encrypt(mpz(vote), public_key)
     return ciphertext
 
 def compteur (votes,key_pair):
@@ -107,20 +107,32 @@ def example_votes() :
     results = decipher(sum,key_pair)
     division(candidates , results, nb_of_candidates)
 
+def division_test(candidates, results, nb_of_candidates) :
 
-def main1():
+    print("candidates----"+ str(candidates))
+    candidate_votes = zeros(nb_of_candidates+1, int)
+    candidate_votes[nb_of_candidates], _voting_results=f_divmod(results,(mpz(candidates[nb_of_candidates])))
+    print("Candidate " + str(nb_of_candidates+1) +" votes: {0}".format((candidate_votes[nb_of_candidates])))
+    for i in range(nb_of_candidates-1 ,-1,-1):
+        candidate_votes[i] , _voting_results = f_divmod(_voting_results,int(candidates[i]))
+        print("Candidate " + str(i+1) +" votes: {0}".format(int(candidate_votes[i])))
+    #modular division to reveal number of votes for each candidate
+
+def main():
     nb_votes=0
 
     key_pair = paillier.keygen()
 
     #assign a number to each candidate, also to a blank vote
-    nb_of_candidates = 3
+    nb_of_candidates = 5
 
     #choose the number assigned to candidates depending on how many people vote
     candidate_1=mpz(1)
-    candidate_2=mpz(100000)
-    candidate_3=mpz(100000000000000) # the number assigned to the candidate is 10^i+2
-    blank_vote=mpz(1)
+    candidate_2=mpz(1000)
+    candidate_3=mpz(10000)
+    candidate_4=mpz(100000)
+    candidate_5=mpz(1000000)# the number assigned to the candidate is 10^i+2
+  #  blank_vote=mpz(1)
 
     #initialize the sum
     sum=paillier.encrypt(mpz(0), key_pair.public_key)
@@ -132,12 +144,14 @@ def main1():
 
     votes=[('A',candidate_3), ('B',candidate_2),('C',candidate_3),
        ('D',candidate_2),('E',candidate_3),('F',candidate_1),
-       ('G',candidate_3), ('H',candidate_2),('J',candidate_3),
-      ('K',candidate_1),('L',candidate_2),('M',candidate_3)]
+       ('G',candidate_5), ('H',candidate_2),('J',candidate_3),
+      ('K',candidate_1),('L',candidate_4),('M',candidate_3), ('N',candidate_5)]
+    # C1 : 2 C2 : 3 C3 : 5 C4 : 1 C5 : 2
     for voter,candidate in votes:
         print("Voter: {0}".format(voter))
         ciphertext=paillier.encrypt(mpz(candidate), key_pair.public_key)
-        print("Vote Ciphertext:\n\n{0}".format(ciphertext.c))
+        print("Vote Ciphertext:\n{0}".format(ciphertext.c))
+        print (str (ciphertext ))
         sum+=(ciphertext)
         anon_votes.append(ciphertext)
         nb_votes+=1
@@ -146,9 +160,13 @@ def main1():
     #decryption (TO DO : move to different file later)
     results=paillier.decrypt(sum, key_pair.private_key)
     print("vote results:\n{0}".format(results))
-
-    #modular division to reveal number of votes for each candidate
-    candidate_3_votes, _voting_results=f_divmod(results,candidate_3)
+    division_test([candidate_1,candidate_2,candidate_3,candidate_4,candidate_5],results,nb_of_candidates-1)
+#modular division to reveal number of votes for each candidate
+    candidate_5_votes, _voting_results=f_divmod(results,candidate_5)
+    print("Candidate 5 votes: {0}".format(candidate_5_votes))
+    candidate_4_votes, candidate_3_votes=f_divmod(_voting_results,candidate_4)
+    print("Candidate 4 votes: {0}".format(candidate_4_votes))
+    candidate_3_votes, candidate_2_votes=f_divmod(_voting_results,candidate_3)
     print("Candidate 3 votes: {0}".format(candidate_3_votes))
     candidate_2_votes, candidate_1_votes=f_divmod(_voting_results,candidate_2)
     print("Candidate 2 votes: {0}".format(candidate_2_votes))

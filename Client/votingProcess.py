@@ -39,6 +39,7 @@ def vote():
         # normalement je récup aussi tout le reste => comment je le stocke ????
         [token, publick_paillier, candidates_dico] = db.sendtoVoter()
         token2 = replaceToken.getToken2(token)
+
         if token2 == "ERROR" :
             print("You have already voted.")
             print("You cannot vote again for this election. Goodbye.")
@@ -49,7 +50,8 @@ def vote():
             for i in range(0, len(candidates_dico) ) :
                 (name , numbers) = candidates_dico[i]
                 candidates[i] = name
-                candidates_num.append(int(numbers))
+                candidates_num.append(numbers)
+            
             print("Here are the candidates : ") 
             print(candidates)
             vote=int(input("Enter your vote (number from 0 to " + str(len(candidates_num)-1 )+") "))
