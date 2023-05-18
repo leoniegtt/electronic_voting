@@ -1,6 +1,5 @@
 #executer une fois : python Serveur_Verif/DBToken.py
  
-
 import sqlite3
 
 # Création fichier base de données .db
@@ -63,5 +62,3 @@ def getListToken() : #pour le résultat
         
 
 dbCreateTables()
-#insertTokens("thomas","coucou")
-#print(str(isTokenExists("marie")))

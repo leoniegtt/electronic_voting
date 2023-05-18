@@ -59,6 +59,6 @@ def vote():
         vote_chiffre_local = voteChiffre(candidates_num[vote], public_key_paillier)
         dbVotes.insertVote(vote_chiffre_local,token2)        
     
-        print ("Your vote has been casted. Goodbye.")
+        print ("Your vote has been casted.")
         print("Here is your ballot: \n" + str(vote_chiffre_local)+ "\nYou can save it to verify your vote when the election is done!")
     

@@ -16,7 +16,3 @@ def getToken2(token1) :
         token2 = generateToken2.totalEncryption(token1)
         gestionDBToken.updateToken(token1, token2)
         return token2
-    
-    
-
-# faire fonction qui regarde si t1 déjà dans bdd et si oui alors génère un nouveau t2

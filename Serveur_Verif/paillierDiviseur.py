@@ -1,6 +1,6 @@
 from gmpy2 import f_divmod
 from gmpy2 import mpz
-from paillierlib import paillier
+
 from numpy import zeros
 
 #modular division to reveal number of votes for each candidate
