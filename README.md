@@ -1,9 +1,10 @@
 # Electronic voting system based on tokens and Paillier cryptosystem
 
-Paper ballot voting has been the standard method regarding elections, being used in most countries around the world. Yet voting by paper ballot is not without its limitations: paper ballots can be lost, misread or miscounted leading to inaccurate vote counts and disputes over the election results.
+Paper ballot voting has been the standard method regarding elections, being used in most countries around the world. Yet voting by paper ballot is not without its limitations: paper ballots can be lost, misread or miscounted leading to inaccurate vote counts and disputes over the election results. 
+
+Electronic voting systems offer safer, more efficient, and faster methods of managing election. They can also be more accessible since they don't necessarily require the voter to go to  a polling station, allowing the voter to cast a ballot from anywhere. However when creating an electronic voting system, one needs to be extremely cautious about safety and confidentiality. If not, the system could be easily attacked, resulting in a leak of private information or even in malicious tampering of results.
 
 We propose a Paillier cryptosystem and token based architecture to solve various issues that appear in the voting process.
-
 Our implementation simply consists of a terminal interface to allow the user to cast a vote, we would like to include a web interface in the future to be more accessible.
 
 ## Architecture Diagram
