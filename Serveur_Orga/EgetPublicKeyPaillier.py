@@ -7,5 +7,5 @@ import paillier_generate_key
 
 #récupération clé publique Paillier
 def getPublicKeyPaillier() :
-  public_key_paillier = paillier_generate_key.get_key_pair().public_key
+  public_key_paillier = paillier_generate_key.getPublic()
   return public_key_paillier

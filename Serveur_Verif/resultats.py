@@ -7,7 +7,7 @@ sys.path.append(os.path.dirname(__file__) + "/../Serveur_Orga")
 import dbVotes
 import ClisteCandidats
 
-from paillier_generate_key import get_key_pair
+import paillier_generate_key
 from decipher import decipher
 from paillierDiviseur import division
 
@@ -24,9 +24,9 @@ def giveResults() :
     print("Voici la liste des bulletins de vote :")
     impressVote(votes)
     
-    key_pair = get_key_pair()
-    public_key = key_pair.public_key
-    private_key = key_pair.private_key
+
+    public_key = paillier_generate_key.getPublic()
+    private_key = paillier_generate_key.getPrivate()
     
      #pas donner la clé privée au compteur
     sum = paillier_compteur.compteur (votes,public_key)
