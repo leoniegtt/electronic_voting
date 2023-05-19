@@ -61,5 +61,5 @@ def vote():
         dbVotes.insertVote(vote_chiffre_local,token2)        
     
         print ("Your vote has been casted.")
-        print("Here is your ballot: \n" + str(vote_chiffre_local)+ "\nYou can save it to verify your vote when the election is done!")
+        print("Here is your ballot: \n" + str(vote_chiffre_local.c) + str(vote_chiffre_local.n)+ "\nYou can save it to verify your vote when the election is done!")
     

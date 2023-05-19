@@ -11,21 +11,30 @@ from paillier_generate_key import get_key_pair
 from decipher import decipher
 from paillierDiviseur import division
 
+def impressVote(votes):
+    for index in range(len(votes)) :
+        print("vote n° : " + str(index+1))
+        print(str(votes[index].c)+str(votes[index].n))
+        print("\n")
+
 def giveResults() :
-    print("RESULTATS")
+    print("+++ RESULTATS +++ ")
     votes = dbVotes.getAllVotes()
     print("\nNombre de bulletins de vote : " + str(len(votes)) + "\n")
+    print("Voici la liste des bulletins de vote :")
+    impressVote(votes)
+    
     key_pair = get_key_pair()
     public_key = key_pair.public_key
+    private_key = key_pair.private_key
     
-   
-    print("Voici la liste des bulletins de vote :")
      #pas donner la clé privée au compteur
     sum = paillier_compteur.compteur (votes,public_key)
-    results = decipher(sum,key_pair)
-    print("\nresultsss " + str(results))
-    (c, candidates) = ClisteCandidats.transformCandidates(ClisteCandidats.getCandidates())
-    print ("\nlen_candidate = " + str(len(candidates)-1))
-    division(candidates , results, len(candidates)-1)
-
+    
+    results = decipher(sum,private_key)
+    
+    (candidates_name, candidates) = ClisteCandidats.transformCandidates(ClisteCandidats.getCandidates())
+    print("----- RESULTATS DES VOTES -----")
+    division(candidates, candidates_name, results, len(candidates)-1)
+    
 giveResults()

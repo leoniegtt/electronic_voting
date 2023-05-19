@@ -11,11 +11,13 @@ def compteur (votes,public_key_paillier):
     anon_votes=[]
     for ciphertext in votes:
 
-        print((ciphertext))
-       # res=get_class(ciphertext[0])
+        #print((ciphertext))
+        # res=get_class(ciphertext[0])
         sum+=ciphertext
         anon_votes.append(ciphertext)
         nb_votes+=1
 
-    print("chiffre sum: \n{0}".format(sum))
-    return sum
+    print("[COMPTEUR]")
+    print("Somme obtenue : \n" + str(sum.c)+str(sum.n))
+    somme_res = sum - paillier.encrypt(mpz(0), public_key_paillier)
+    return somme_res
