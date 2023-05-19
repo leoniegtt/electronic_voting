@@ -54,5 +54,6 @@ def getPrivate() :
     with open("PriN.key", "r") as mykey5:
         prin = mpz(mykey5.read())
     privatek = paillier.PaillierPrivateKey(pril, priu, prin)
-    
+ 
     return privatek
+

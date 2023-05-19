@@ -17,7 +17,5 @@ def compteur (votes,public_key_paillier):
         anon_votes.append(ciphertext)
         nb_votes+=1
 
-    print("[COMPTEUR]")
-    print("Somme obtenue : \n" + str(sum.c)+str(sum.n))
     somme_res = sum - paillier.encrypt(mpz(0), public_key_paillier)
     return somme_res

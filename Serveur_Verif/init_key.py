@@ -1,0 +1,4 @@
+
+import paillier_generate_key
+
+paillier_generate_key.initKeyPaillier()
