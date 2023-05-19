@@ -8,9 +8,9 @@ We propose a Paillier cryptosystem and token based architecture to solve various
 Our implementation simply consists of a terminal interface to allow the user to cast a vote, we would like to include a web interface in the future to be more accessible.
 
 ## Architecture Diagram
-Our system is composed of 3 main sub-systems. 
-TO DO : ADD GRAPH
+![Graph representing the architecture of our system, it is described below](diagramme_fonctionnement.jpg)
 
+Our system is composed of 3 main sub-systems. 
 
 Firstly, the verification server generates the pair of Paillier cryptographic keys that will be used for an election. It will also retrieve the encrypted results, decrypt them and publish them. It is the only part of the system that contains the private key that allows to decrypt any message encrypted with the public key.
 
