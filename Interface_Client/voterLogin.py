@@ -11,7 +11,7 @@ def getLoginInfo():
     return (login, pwd)
 
 def connexion():
-    print("Connexion au système de vote ALATAX : ")
+    print("Connexion au système de vote : ")
     
     notconnected=True
     while notconnected:
