@@ -5,7 +5,7 @@ Paper ballot voting has been the standard method regarding elections, being used
 Electronic voting systems offer safer, more efficient, and faster methods of managing election. They can also be more accessible since they don't necessarily require the voter to go to  a polling station, allowing the voter to cast a ballot from anywhere. However when creating an electronic voting system, one needs to be extremely cautious about safety and confidentiality. If not, the system could be easily attacked, resulting in a leak of private information or even in malicious tampering of results.
 
 We propose a Paillier cryptosystem and token based architecture to solve various issues that appear in the voting process.
-Our implementation simply consists of a terminal interface to allow the user to cast a vote, we would like to include a web interface in the future to be more accessible.
+Our implementation simply consists of a terminal interface to allow the user to cast a vote, we would like to include a web interface in the future to be more accessible. We would also recommand adding a timeout that prevents voters from casting a ballot after the end of the election, and then automatically induces the computation and publication of the results.
 
 ## Architecture Diagram
 ![Graph representing the architecture of our system, it is described below](diagramme_fonctionnement.jpg)
@@ -20,12 +20,31 @@ Lastly, the ballot server receives the encrypted votes, stores them and adds the
 
 ## Installation and Usage
 
-Use the package manager pip to install paillierlib.
+Use the package manager pip to install the different libraries.
 ```bash
+pip install numpy
 pip install paillierlib
+pip install pcryptodome
+pip install cryptography
+pip install gmpy2==2.1.0rc1
 ```
-TO DO : ADD OTHER COMMANDS TO RUN
+To create a key pair for one election, run: 
+```bash
+python Serveur_Verif/Init_key
+```
 
+To create a database for an election, run:
+```bash
+python Serveur_Orga/AcreationDB.py
+```
+Once the previous steps are done, voters can access their interface and then vote using this line of command : 
+```bash
+python Interface_Client/voterLogin.py
+```
+When the election is over, the organisation can get the results using:
+```bash
+python Serveur_Verif/vresultats.py
+```
 
 ## Context
 
