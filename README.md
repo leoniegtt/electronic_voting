@@ -8,7 +8,7 @@ We propose a Paillier cryptosystem and token based architecture to solve various
 Our implementation simply consists of a terminal interface to allow the user to cast a vote, we would like to include a web interface in the future to be more accessible. We would also recommand adding a timeout that prevents voters from casting a ballot after the end of the election, and then automatically induces the computation and publication of the results.
 
 ## Architecture Diagram
-![Graph representing the architecture of our system, it is described below](diagramme_fonctionnement.jpg)
+![Graph representing the architecture of our system, it is described below](diagramme_fonctionnement-last.jpg)
 
 Our system is composed of 3 main sub-systems. 
 
