@@ -30,7 +30,7 @@ pip install gmpy2==2.1.0rc1
 ```
 To create a key pair for one election, run: 
 ```bash
-python Serveur_Verif/Init_key
+python Serveur_Verif/Init_key.py
 ```
 
 To create a database for an election, run:
@@ -43,7 +43,7 @@ python Interface_Client/voterLogin.py
 ```
 When the election is over, the organisation can get the results using:
 ```bash
-python Serveur_Verif/vresultats.py
+python Serveur_Verif/resultats.py
 ```
 
 ## Context
