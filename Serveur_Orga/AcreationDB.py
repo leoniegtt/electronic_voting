@@ -5,6 +5,8 @@ import DcreateToken
 connect = sqlite3.connect("Serveur_Orga/dbb_orga.db")
 cursor = connect.cursor()
 
+import EgetPublicKeyPaillier
+
 # Création des tables
 def dbCreateTables():
         cursor.execute ("CREATE TABLE IF NOT EXISTS Liste_votants (f_name VARCHAR(100), l_name VARCHAR(100), mail VARCHAR(100), login VARCHAR(100), mdp VARCHAR(100), PRIMARY KEY (login))")
@@ -13,14 +15,18 @@ def dbCreateTables():
 
 def addToken() :
         data = []
+        l_token=[]
         res = cursor.execute("SELECT login, mdp FROM Liste_votants")
         connect.commit()
         res = list(res.fetchall())
         for i in res :
                 login = i[0]
                 pwd = i[1]
-                data.append((login, pwd, DcreateToken.totalEncryption(login, pwd)))
+                tok = DcreateToken.totalEncryption(login, pwd)
+                data.append((login, pwd, tok))
+                l_token.append(tok)
         insertInfoToken(data)
+        EgetPublicKeyPaillier.sendToken1(l_token)
 
 def insertVotants(data_mul):
         cursor.executemany("INSERT INTO Liste_votants VALUES(?, ?, ?, ?, ?)", data_mul)
